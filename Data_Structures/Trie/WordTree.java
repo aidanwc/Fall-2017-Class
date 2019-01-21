@@ -1,10 +1,5 @@
 
 
-//COMP 250 - Introduction to Computer Science - Fall 2017
-//Assignment #3 - Question 1
-//Name: AIDAN WEBER-CONCANNON
-//Student Number: 260708481
-
 import java.util.*;
 
 /*
@@ -28,11 +23,10 @@ public class WordTree
      * Insert word into the tree.  First, find the longest
      * prefix of word that is already in the tree (use getPrefixNode() below).
      * Then, add TreeNode(s) such that the word is inserted
-     * according to the specification in PDF.
      */
     public void insert(String word)
     {
-        //  ADD YOUR CODE BELOW HERE
+        
 
             WordTreeNode start = this.getPrefixNode(word); //Starts inserting at longest prefix, potentially the root
             int depth = start.depth; //Gets the depth of the root
@@ -50,7 +44,7 @@ public class WordTree
             }
 
 
-        //  ADD YOUR ABOVE HERE
+       
     }
 
     // insert each word in a given list
@@ -67,12 +61,11 @@ public class WordTree
     /*
      * Given an input word, return the TreeNode corresponding the longest prefix that is found.
      * If no prefix is found, return the root.
-     * In the example in the PDF, running getPrefixNode("any") should return the
+     * Running getPrefixNode("any") should return the
      * dashed node under "n", since "an" is the longest prefix of "any" in the tree.
      */
    WordTreeNode getPrefixNode(String word)
     {
-        //   ADD YOUR CODE BELOW HERE
        WordTreeNode temp = this.root; //Starts at root and tries to go to next letter, if that letter is null returns root
        for(int i=0;i<word.length();i++){
            if(temp.getChild(word.charAt(i))==null) {
@@ -83,7 +76,7 @@ public class WordTree
            }
        }
         return temp;
-        //   ADD YOUR CODE ABOVE HERE
+       
 
     }
 
@@ -99,11 +92,9 @@ public class WordTree
 
     /*
      *  Return true if word is contained in the tree (i.e. it was added by insert), false otherwise.
-     *  Hint:  any string is a prefix of itself, so you can use getPrefixNode().
      */
     public boolean contains(String word)
     {
-        //   ADD YOUR CODE BELOW HERE
 
         String s  = getPrefix(word); //Converts prefix node to string
         WordTreeNode temp= getPrefixNode(word); //Gets node form
@@ -112,7 +103,6 @@ public class WordTree
             return true;
         }
         return false;
-        //   ADD YOUR CODE ABOVE HERE
     }
 
     /*
@@ -121,7 +111,6 @@ public class WordTree
      */
     public ArrayList<String> getListPrefixMatches( String prefix )
     {
-        //  ADD YOUR CODE BELOW
         ArrayList<String> list = new ArrayList<String>(); //Creates a list
         WordTreeNode myRoot= getPrefixNode(prefix); //Gets the longest prefix node
 
@@ -131,8 +120,6 @@ public class WordTree
         recursive(myRoot,list);//Otherwise calls depth first post order method, FOUND AT BOTTOM OF CLASS
         return list;
 
-        //  ADD YOUR CODE ABOVE HERE
-        //if a word from the prefix add to the list or merge?? after to stringing it
     }
 
 
@@ -145,15 +132,6 @@ public class WordTree
 	 *  Similarly the index of character c is obtained by "casting":   (int) c.
 	 *  So children[97] = children[ (int) 'a']  would reference a child node corresponding to 'a'
 	 *  since (char)97 == 'a'   and  (int)'a' == 97.
-	 *
-	 *  To learn more:
-	 * -For all unicode charactors, see http://unicode.org/charts
-	 *  in particular, the ascii characters are listed at http://unicode.org/charts/PDF/U0000.pdf
-	 * -For ascii table, see http://www.asciitable.com/
-	 * -For basic idea of converting (casting) from one type to another, see
-	 *  any intro to Java book (index "primitive type conversions"), or google
-	 *  that phrase.   We will cover casting of reference types when get to the
-	 *  Object Oriented Design part of this course.
 	 */
 
     public class WordTreeNode
@@ -161,9 +139,6 @@ public class WordTree
 		/*
 		 *   Highest allowable character index is NUMCHILDREN-1
 		 *   (assuming one-byte ASCII i.e. "extended ASCII")
-		 *
-		 *   NUMCHILDREN is constant (static and final)
-		 *   To access it, write "TreeNode.NUMCHILDREN"
 		 *
 		 *   For simplicity,  we have given each WordTree node 256 children.
 		 *   Note that if our words only consisted of characters from {a,...,z,A,...,Z} then
@@ -207,16 +182,14 @@ public class WordTree
 		 *
 		 */
 
-        public WordTreeNode createChild(char  c) //call by this.
+        public WordTreeNode createChild(char  c) 
         {
             WordTreeNode child       = new WordTreeNode();
 
-            // ADD YOUR CODE BELOW HERE
                 child.parent = this; //Sets parent
                 child.charInParent=c;
                 child.depth= this.depth + 1; //Increases depth of child
                 this.children[c]=child; //Sets parents child to this node
-            // ADD YOUR CODE ABOVE HERE
 
             return child;
         }
@@ -246,23 +219,18 @@ public class WordTree
 
 		/*
 		 *  Return the prefix (as a String) associated with this node.  This prefix
-		 *  is defined by descending from the root to this node.  However, you will
-		 *  find it is easier to implement by ascending from the node to the root,
-		 *  composing the prefix string from its last character to its first.
-		 *
+		 *  is defined by descending from the root to this node. 
 		 *  This overrides the default toString() method.
 		 */
 
         public String toString()//may be formated incorectly to call
         {
-            // ADD YOUR CODE BELOW HERE
 
            if(this.charInParent == (char)0) { //If root returns empty String
                return "";
            }else{
                return this.parent.toString()+ this.charInParent; //Otherwise recursively adds letters to string
            }
-            // ADD YOUR CODE ABOVE HERE
         }
 
     }
